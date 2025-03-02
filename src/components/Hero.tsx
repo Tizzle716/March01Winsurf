@@ -1,79 +1,56 @@
 import React from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import { useMouseParallax } from '../hooks/useMouseParallax';
-import { useSmoothTransition } from '../hooks/useSmoothTransition';
-import { useRevealEffect } from '../hooks/useRevealEffect';
 import { AnimatedTitle } from './AnimatedTitle';
-import { ParallaxCard } from './ParallaxCard';
+import { Mail, Phone } from 'lucide-react';
+import banner from '../assets/banner2.png';
 
 export const Hero = () => {
-  const mousePosition = useMouseParallax(0.05);
-  const sectionRef = useSmoothTransition();
-  const [titleRef, titleTransform] = useRevealEffect('right');
-  const [contentRef, contentTransform] = useRevealEffect('left');
-
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden perspective-container">
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-50 to-white -z-10 gradient-animate" />
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-900 to-black">
+      {/* Background Image with Overlay */}
       <div 
-        className="absolute inset-0 -z-10 transition-transform duration-300 ease-out"
+        className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1519681393784-d120267933ba')",
-          backgroundPosition: 'center',
+          backgroundImage: `url(${banner})`,
           backgroundSize: 'cover',
-          opacity: 0.1,
-          transform: `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0)`
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.4
         }}
       />
       
-      <div className="container mx-auto px-6 py-24">
-        <ParallaxCard className="max-w-4xl mx-auto bg-white/80 backdrop-blur-lg rounded-2xl p-8 shadow-xl">
-          <div 
-            ref={titleRef} 
-            className="section-transition"
-            style={{ 
-              transform: titleTransform,
-              transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-6 py-16 text-center">
+        <span className="text-sm text-indigo-400 font-medium mb-4 block">
+          AI-Powered Business Automation
+        </span>
+        
+        <AnimatedTitle 
+          text="Transform Your Business with AI Automations"
+          className="text-5xl md:text-6xl font-bold mb-8 text-white reveal-text"
+        />
+        
+        <p className="text-xl text-indigo-200 mb-12 max-w-3xl mx-auto">
+          Revolutionize your operations with our intelligent AI solutions. From 24/7 voice agents 
+          to automated workflows, we're here to make your business truly unstoppable.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="mailto:ContactUs@aiautomationsunstoppable.com"
+            className="inline-flex items-center px-8 py-4 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-all duration-300"
           >
-            <div className="inline-flex items-center gap-2 bg-indigo-50 px-4 py-2 rounded-full mb-8 animate-float">
-              <Sparkles className="w-4 h-4 text-indigo-600" />
-              <span className="text-sm text-indigo-600 font-medium">
-                Revolutionizing Workflow Management
-              </span>
-            </div>
-            
-            <AnimatedTitle 
-              text="Transform Your Team's Productivity"
-              className="text-6xl font-bold mb-8 reveal-text"
-            />
-          </div>
-          
-          <div 
-            ref={contentRef}
-            className="section-transition"
-            style={{ 
-              transform: contentTransform,
-              transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s'
-            }}
+            <Mail className="w-5 h-5 mr-2" />
+            Contact Us
+          </a>
+          <a
+            href="tel:716-260-6436"
+            className="inline-flex items-center px-8 py-4 bg-white/10 text-white rounded-lg font-medium hover:bg-white/20 transition-all duration-300"
           >
-            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
-              Streamline collaboration, automate workflows, and boost efficiency with our 
-              next-generation project management platform.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group px-8 py-4 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-all duration-300 flex items-center gap-2 hover:gap-4">
-                Start Free Trial
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
-              <button className="px-8 py-4 bg-white text-indigo-600 rounded-lg font-medium border border-indigo-200 hover:bg-indigo-50 transition-all duration-300 hover:scale-105">
-                Watch Demo
-              </button>
-            </div>
-          </div>
-        </ParallaxCard>
+            <Phone className="w-5 h-5 mr-2" />
+            716-260-6436
+          </a>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };

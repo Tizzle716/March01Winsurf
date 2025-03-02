@@ -1,17 +1,12 @@
-import React from 'react';
-import { Hero } from './components/Hero';
-import { Features } from './components/Features';
-import { ParallaxSection } from './components/ParallaxSection';
-import { Stats } from './components/Stats';
+import { RouterProvider } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import { router } from './router';
 
 function App() {
   return (
-    <div className="overflow-hidden">
-      <Hero />
-      <Features />
-      <ParallaxSection />
-      <Stats />
-    </div>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
 

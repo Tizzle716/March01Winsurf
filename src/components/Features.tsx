@@ -1,71 +1,50 @@
 import React from 'react';
-import { Zap, Shield, Users, Workflow } from 'lucide-react';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import { useSmoothTransition } from '../hooks/useSmoothTransition';
-import { AnimatedTitle } from './AnimatedTitle';
-import { ParallaxCard } from './ParallaxCard';
-
-const features = [
-  {
-    icon: <Zap className="w-6 h-6" />,
-    title: 'Lightning Fast',
-    description: 'Experience unmatched speed with our optimized infrastructure'
-  },
-  {
-    icon: <Shield className="w-6 h-6" />,
-    title: 'Enterprise Security',
-    description: 'Bank-grade encryption and advanced security protocols'
-  },
-  {
-    icon: <Users className="w-6 h-6" />,
-    title: 'Team Collaboration',
-    description: 'Real-time collaboration tools for seamless teamwork'
-  },
-  {
-    icon: <Workflow className="w-6 h-6" />,
-    title: 'Workflow Automation',
-    description: 'Automate repetitive tasks and focus on what matters'
-  }
-];
+import { SERVICES } from '../constants';
 
 export const Features = () => {
-  const [ref, isVisible] = useIntersectionObserver();
-  const sectionRef = useSmoothTransition();
-
   return (
-    <section ref={sectionRef} className="py-24 bg-white relative scroll-reveal">
+    <section className="py-24 bg-gradient-to-b from-white to-indigo-50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <AnimatedTitle 
-            text="Powerful Features for Modern Teams"
-            className="text-4xl font-bold mb-4 reveal-text"
-          />
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Everything you need to manage projects, automate workflows, and scale your business.
+          <h2 className="text-4xl font-bold mb-4 text-gray-900">
+            AI-Powered Solutions for Your Business
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Transform your operations with our cutting-edge AI solutions. From intelligent voice agents 
+            to automated workflows, we make your business truly unstoppable.
           </p>
         </div>
-        
-        <div 
-          ref={ref}
-          className="stagger-animate perspective-container"
-          data-visible={isVisible}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <ParallaxCard
-                key={index}
-                className="p-6 rounded-xl bg-white border border-gray-100 hover:shadow-xl transition-all duration-500"
-              >
-                <div className="w-12 h-12 bg-indigo-50 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <div className="text-indigo-600 transition-transform duration-300 group-hover:rotate-12">
-                    {feature.icon}
-                  </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {SERVICES.map((service, index) => (
+            <div 
+              key={index}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-indigo-50"
+            >
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mr-4">
+                  <service.icon className="w-6 h-6 text-indigo-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </ParallaxCard>
-            ))}
-          </div>
+                <h3 className="text-2xl font-bold text-gray-900">{service.title}</h3>
+              </div>
+              
+              <p className="text-gray-600 mb-6">
+                {service.description}
+              </p>
+
+              <ul className="space-y-3">
+                {service.features.map((feature, featureIndex) => (
+                  <li 
+                    key={featureIndex}
+                    className="flex items-start"
+                  >
+                    <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2 mr-3" />
+                    <span className="text-gray-700">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>
