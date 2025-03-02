@@ -2,6 +2,9 @@
 
 A modern web application for AI-powered business automation solutions. Built with React, TypeScript, Tailwind CSS, Supabase, and Sanity.
 
+## Live Demo
+Visit our live site: [AI Automations Unstoppable](https://march01winsurf.netlify.app)
+
 ## Features
 
 - 🔐 Secure Authentication with Supabase
